@@ -1,0 +1,66 @@
+# Importo a las libreria que son necesarias
+import pandas as pd
+from google.colab import files
+import os
+
+# Subo el archivo excel con todos los puntos y la columna con postes kilometricos.
+uploaded = files.upload()
+
+# Obtengo el nombre del primer archivo subido.
+archivo = list(uploaded.keys())[0]
+
+# Creo variable con el excel en dataframe
+df = pd.read_excel(archivo)
+
+# A esta funcion se le pasan la cantidad de progresivas a calcular, el poste inicial y final.
+# Y recalcula las progresivas entre esos palos de forma uniformemente
+
+def ajustar_progresivas(elementos, poste_inicial, poste_final):
+  global progresivas_ajustadas # Necesito que sea global para modificarla
+
+  metros = poste_final - poste_inicial
+  distribuir = metros / (elementos - 1)
+  distribuir_redondeado = round(distribuir/10) * 10  # Metros a distribuir entre las progresivas (solo multiplos de 10)
+
+  progresivas_sin_ajuste = [ round((poste_inicial + (distribuir*i))/10)*10 for i in range(elementos) ] # Creo una lista con las progresivas distribuidas uniformemente
+
+  for i in range(len(progresivas_sin_ajuste)-(elementos-1)): # Depura la lista de elementos no deseados
+    progresivas_sin_ajuste.pop()
+
+  progresivas_ajustadas += progresivas_sin_ajuste # Agrego a la lista las progresivas corregidas
+
+progresivas_ajustadas = [] # Va a convertirse en la nueva columna con Progresivas ajustadas
+postes = []                # Contiene los postes
+postes_indice = []         # Contiene los indices de los postes - Sirve para saber cantidad de elementos entre postes
+
+def iterrar_puntos_cada20(tabla):
+
+  # Asigno Valores a las listas.
+  for indice, elemento in enumerate(tabla['Postes']):
+    if pd.notna(elemento): # Itera todos los elementos que no sean NA (sin valor) y los agrega a las listas
+      postes.append(int(elemento))
+      postes_indice.append(indice)
+
+  # Itera todos los tramos entre los postes y ejecuta funcion ajustar_progresivas
+  for i in range(len(postes)):
+
+    ajustar_progresivas(postes_indice[i+1]-postes_indice[i]+1,postes[i],postes[i+1])
+
+    if i+2 == len(postes_indice): # Cuando llega al ultimo elemento termina la iteraccion.
+      break
+
+  progresivas_ajustadas.append(int(df['Postes'].values[-1])) # Agrego el ultimo poste para que coincidan los rangos
+  df['Progresiva ajustada'] = progresivas_ajustadas
+  df['Coeficiente ajustado'] = (df['Progresiva ajustada'] / 20 ) / (df['orden'] - 1 ) # Calculo el nuevo coeficiente
+
+  #Ejecuto funcion principal y descargo el archivo .xlsx con el trabajo realizado
+
+iterrar_puntos_cada20(df)
+
+
+# Exportar resultado en EXCEL
+
+df.to_excel(f"Servicio Progresivas ajustadas Python.xlsx",sheet_name="Hoja 1", index=False)
+files.download("Servicio Progresivas ajustadas Python.xlsx")
+
+print("Tarea terminada! :)")
