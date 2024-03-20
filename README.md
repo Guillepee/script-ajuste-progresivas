@@ -4,7 +4,7 @@ Desarrollo para recalcular progresivas ferroviarias segun postes kilometricos.
 # Descripción:
 Este script de Python ajusta las progresivas de un archivo de Excel, distribuyéndolas uniformemente entre los postes kilométricos.
 
-# Funcionalidades:
+### Funcionalidades:
 Ajusta las progresivas: La función ajustar_progresivas toma como entrada la cantidad de progresivas a calcular, el poste inicial y final, y recalcula las progresivas entre esos postes de forma uniforme.
 Calcula el nuevo coeficiente: Se calcula un nuevo coeficiente utilizando la progresiva ajustada y el orden del punto.
 
