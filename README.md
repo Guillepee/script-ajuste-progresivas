@@ -8,21 +8,21 @@ Este script de Python ajusta las progresivas de un archivo de Excel, distribuyé
 Ajusta las progresivas: La función ajustar_progresivas toma como entrada la cantidad de progresivas a calcular, el poste inicial y final, y recalcula las progresivas entre esos postes de forma uniforme.
 Calcula el nuevo coeficiente: Se calcula un nuevo coeficiente utilizando la progresiva ajustada y el orden del punto.
 
-# Uso:
+### Uso:
 Subir el archivo Excel: Sube el archivo Excel que contiene los puntos y la columna con postes kilométricos.
 Ejecutar el script: Presiona el botón "Ejecutar" en Google Colab.
 Descargar el archivo: Se descargará un nuevo archivo Excel con las progresivas ajustadas y el nuevo coeficiente.
 
-# Requisitos:
+### Requisitos:
 Python 3
 Pandas
 Google Colab
 
-# Recursos:
+### Recursos:
 Documentación de Pandas: https://pandas.pydata.org/pandas-docs/stable/
 Google Colab: https://colab.research.google.com/
 
-# Contacto:
+### Contacto:
 Autor: Guillermo Palmieri
 Correo electrónico: guillermo.palmieri23@gmail.com
 
@@ -32,21 +32,21 @@ Correo electrónico: guillermo.palmieri23@gmail.com
 # Description:
 This Python script adjusts the progressives of an Excel file, distributing them evenly between the kilometer posts.
 
-# Features:
+### Features:
 Adjusts the progressives: The ajustar_progresivas function takes as input the number of progressives to calculate, the initial and final post, and recalculates the progressives between those posts evenly.
 Calculates the new coefficient: A new coefficient is calculated using the adjusted progressive and the point order.
 
-# Usage:
+### Usage:
 Upload the Excel file: Upload the Excel file that contains the points and the kilometer post column.
 Run the script: Press the "Run" button in Google Colab.
 Download the file: A new Excel file will be downloaded with the adjusted progressives and the new coefficient.
 
-# Requirements:
+### Requirements:
 Python 3
 Pandas
 Google Colab
 
-# Resources:
+### Resources:
 Pandas documentation: https://pandas.pydata.org/pandas-docs/stable/
 Google Colab: https://colab.research.google.com/
 
